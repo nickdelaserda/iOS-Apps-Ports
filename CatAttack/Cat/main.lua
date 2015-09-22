@@ -43,17 +43,17 @@ quitBtn:setTextColor(250,0,0)
 		local black = display.newImage( "background/black.png")
 		black.x= 0; black.y = 195
 
-		local cat = display.newImage("cat.png")
+		local cat = display.newImage("resources/pictures/cat.png")
 		cat.x = 160 cat.y = 250
 
 		--loading multiple pics into table called pics
 		local pics = { "background/blue.png", "background/green.png", "background/orange.png", "background/purple.png", "background/red.png", "background/yellow.png"}
 
 		--load sound
-		local catEffect = audio.loadSound("cat.wav")
+		local catEffect = audio.loadSound("resources/sounds/cat.wav")
 
 		--load money rain
-		local rain = ("money.png")
+		local rain = ("resources/pictures/money.png")
 		 
 		win = 0
 		score = 0
@@ -75,7 +75,7 @@ quitBtn:setTextColor(250,0,0)
 				--if user won, go back to starting picture and remove previous rain
 				if win == 1 then
 					display.newImage("background/black.png")
-					local cat = display.newImage("cat.png")
+					local cat = display.newImage("resources/pictures/cat.png")
 					cat.x = 160 cat.y = 250
 					win = 0
 						for count=1, 100, 1 do
@@ -100,14 +100,14 @@ quitBtn:setTextColor(250,0,0)
 				--picks a random number and displays corresponding picture
 				local chosenPic = pics[num]
 				local obj = display.newImage(chosenPic)
-				local cat = display.newImage("cat.png")
+				local cat = display.newImage("resources/pictures/cat.png")
 				cat.x = 160 cat.y = 250
 
 				--make it rain yo
 				for fCounter=1, 2, 1 do 
 						for counter=1, 500, 100 do
 							randomNumber = math.random(-200, -50)
-							moneyRain = display.newImage("money.png")
+							moneyRain = display.newImage("resources/pictures/money.png")
 							moneyRain.x = counter
 							moneyRain.y = randomNumber
 							moneyRain:scale(.5,.5)
@@ -123,7 +123,7 @@ quitBtn:setTextColor(250,0,0)
 				--if user reaches ten, give congrats
 				if score ==  10 then
 					display.newImage("background/white.png")
-					local money = display.newImage("money.jpg")
+					local money = display.newImage("resources/pictures/money.jpg")
 					money:scale(.8,.8) 
 					money.x = 160 money.y = 250
 					local winner = display.newText("Congrats! You Won!", 150, 50,arial,30)
@@ -131,7 +131,7 @@ quitBtn:setTextColor(250,0,0)
 					for fCounter=1, 10, 1 do 
 						for counter=1, 500, 50 do
 							randomNumber = math.random(-200, -50)
-							moneyRain = display.newImage("money.png")
+							moneyRain = display.newImage("resources/pictures/money.png")
 							moneyRain.x = counter
 							moneyRain.y = randomNumber
 							moneyRain:scale(.5,.5)
@@ -139,11 +139,20 @@ quitBtn:setTextColor(250,0,0)
 						end
 					end
 
+					local endBtn = display.newText("End Game", 290, 0, arial, 12)
+					endBtn:setTextColor(0,0,0)
+
+					function endGame()
+						os.exit()
+					end
+
+
 					--reset variables
 					score = 0
 					cat:removeSelf()
 					cat = nil
 					win = 1
+					endBtn:addEventListener("tap",endGame)
 		    	end
 
 
